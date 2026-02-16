@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Achieve Property Styling - Instant Quote System | Oxyscale AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --orange: #E8470B;
+  --bg: #111827;
+  --card: #1a2234;
+  --surface: #0f1623;
+  --border: rgba(255,255,255,0.07);
+  --accent-border: rgba(232,71,11,0.3);
+  --orange-glow: rgba(232,71,11,0.15);
+  --text: #e2e8f0;
+  --text-dim: #8896ab;
+  --text-muted: #5a6a80;
+}
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+  z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(232,71,11,0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 24px 40px;
+  position: relative;
+  z-index: 1;
+}
+/* HEADER */
+.header { text-align: center; margin-bottom: 48px; }
+.brand {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 20px;
+}
+.header-title {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 12px;
+  color: #fff;
+}
+.header-title .accent { color: var(--orange); }
+.header-sub {
+  font-size: 15px;
+  color: var(--text-dim);
+  max-width: 600px;
+  margin: 0 auto 28px;
+  line-height: 1.7;
+}
+.header-client {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 6px 16px;
+  border-radius: 20px;
+  margin-bottom: 32px;
+}
+/* PROBLEM SECTION */
+.problem-section {
+  background: var(--surface);
+  border: 1px solid var(--accent-border);
+  border-radius: 12px;
+  padding: 28px 32px;
+  margin-bottom: 48px;
+  position: relative;
+  overflow: hidden;
+}
+.problem-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--orange), transparent);
+}
+.problem-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 10px;
+}
+.problem-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.problem-text {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.8;
+}
+/* LEGEND */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.legend-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+}
+.legend-icon.ai-icon {
+  background: var(--orange-glow);
+  border-color: var(--accent-border);
+  color: var(--orange);
+}
+/* PHASES */
+.phase { margin-bottom: 8px; }
+.phase-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.phase-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  background: var(--orange-glow);
+  border: 1px solid var(--accent-border);
+  color: var(--orange);
+  flex-shrink: 0;
+}
+.phase-meta {}
+.phase-number {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 2px;
+}
+.phase-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+.phase-body {
+  margin-left: 24px;
+  padding-left: 24px;
+  border-left: 1px solid var(--border);
+}
+/* NODE CARDS */
+.node {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+  cursor: pointer;
+}
+.node:hover { border-color: rgba(255,255,255,0.15); }
+.node.ai-node {
+  background: linear-gradient(135deg, rgba(232,71,11,0.12) 0%, rgba(232,71,11,0.04) 100%);
+  border-color: var(--accent-border);
+}
+.node.ai-node:hover { border-color: rgba(232,71,11,0.5); }
+.node-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  user-select: none;
+}
+.node-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+.ai-node .node-icon {
+  background: var(--orange-glow);
+  border-color: var(--accent-border);
+  color: var(--orange);
+}
+.node-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  flex: 1;
+}
+.ai-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--orange);
+  background: var(--orange-glow);
+  border: 1px solid var(--accent-border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  display: inline-block;
+  margin-left: 6px;
+}
+.node-detail {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-top: 2px;
+  font-weight: 400;
+}
+.node-arrow {
+  font-size: 12px;
+  color: var(--text-muted);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.node.expanded .node-arrow { transform: rotate(90deg); }
+.node-content {
+  display: none;
+  padding: 0 18px 14px 62px;
+  border-top: 1px solid var(--border);
+  margin-top: 0;
+  padding-top: 12px;
+}
+.node.expanded .node-content { display: block; }
+.sub-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+.sub-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  margin-top: 7px;
+  flex-shrink: 0;
+}
+.ai-node .sub-dot { background: var(--orange); }
+/* CONNECTOR */
+.phase-connector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  margin-left: 24px;
+  position: relative;
+}
+.phase-connector::before {
+  content: '';
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--accent-border), var(--border));
+}
+.phase-connector::after {
+  content: '';
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--orange);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+/* PRINCIPLES */
+.principles-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px 32px;
+  margin-top: 48px;
+}
+.principles-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 6px;
+}
+.principles-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 20px;
+}
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.principle-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px;
+}
+.principle-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.principle-desc {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+/* FOOTER */
+.footer {
+  text-align: center;
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .header-title { font-size: 24px; }
+  .principles-grid { grid-template-columns: 1fr; }
+  .legend { gap: 10px; }
+  .phase-name { font-size: 17px; }
+  .container { padding: 40px 16px 32px; }
+  .problem-section, .principles-section { padding: 20px; }
+}
+</style>
+</head>
+<body>
+<div class="container" id="app"></div>
+<script>
+var data = {
+  client: "Achieve Property Styling",
+  title: 'Instant <span class="accent">Quote System</span>',
+  subtitle: "A branded, on-site quoting tool that lets stylists and agents lock in client commitment in seconds, then delivers a structured action brief to your back-office team for accurate invoice fulfilment.",
+  problem: {
+    title: "The Gap Between Verbal Yes and Formal Commitment",
+    text: "Today, your styling consultations end with a verbal agreement. The stylist walks through the property, discusses the package with the client, and leaves with a handshake. Back at the office, the team manually builds a quote in Zoho, customises the package details, and sends it out - often hours or even a day later. In that gap, clients second-guess, shop around, or simply lose the momentum they had when they said yes on site. On top of that, the details discussed during the consultation don't always make it back to the office accurately, leading to quotes that don't reflect what was promised - which causes pushback, declined quotes, and wasted back-and-forth. This system closes both gaps: it captures formal client commitment on the spot while the intent is fresh, and ensures every detail from the consultation travels back to your team in a structured, actionable format so the follow-up invoice is accurate first time."
+  },
+  legend: [
+    { icon: "&#9654;", label: "Trigger", cls: "" },
+    { icon: "&#9881;", label: "Process", cls: "" },
+    { icon: "&#9889;", label: "Automation", cls: "" },
+    { icon: "&#9670;", label: "Decision", cls: "" },
+    { icon: "&#10022;", label: "AI Powered", cls: "ai-icon" },
+    { icon: "&#9788;", label: "Future", cls: "" }
+  ],
+  phases: [
+    {
+      icon: "&#8853;",
+      number: "Phase 1",
+      name: "On-Site Form Launch",
+      nodes: [
+        {
+          type: "trigger",
+          icon: "&#9654;",
+          label: "Stylist Opens Quote Form",
+          detail: "Simple branded link or bookmark opened on iPad or phone",
+          subs: [
+            "No login required - clean, instant access via saved link",
+            "Mobile-responsive interface designed for on-site use",
+            "Branded to Achieve Property Styling for professional client-facing presentation",
+            "Works on any device with a browser - iPad, iPhone, Android"
+          ]
+        },
+        {
+          type: "process",
+          icon: "&#9881;",
+          label: "Deal Context Identified",
+          detail: "The deal already exists in Zoho from the discovery call and booking",
+          subs: [
+            "Client details, property address, and agent info already captured in Zoho",
+            "Form links to the existing deal record via a unique reference",
+            "No duplicate data entry - all prior information carries forward"
+          ]
+        }
+      ]
+    },
+    {
+      icon: "&#10064;",
+      number: "Phase 2",
+      name: "Package Selection",
+      nodes: [
+        {
+          type: "automation",
+          icon: "&#9889;",
+          label: "Package Categories Pulled Live from Zoho",
+          detail: "Dropdown menu populated in real time from your Zoho product database",
+          subs: [
+            "All 9 styling package categories displayed (e.g. 1-Bed Apartment, 2-Bed House, 3-Bed House)",
+            "Pricing pulled directly from Zoho - one source of truth, no duplicate database",
+            "If you update a package or price in Zoho, the form reflects it automatically",
+            "No separate system to maintain or keep in sync"
+          ]
+        },
+        {
+          type: "process",
+          icon: "&#9881;",
+          label: "Add-On Toggles",
+          detail: "Simple yes/no toggles for the three variables that affect pricing",
+          subs: [
+            "Extra living area (yes/no) - adds the living room surcharge to the total",
+            "Extra study (yes/no) - adds the study surcharge to the total",
+            "Agent referral fee - handled automatically based on agent identification",
+            "Total price updates in real time as selections change"
+          ]
+        }
+      ]
+    },
+    {
+      icon: "&#9997;",
+      number: "Phase 3",
+      name: "Consultation Notes Capture",
+      nodes: [
+        {
+          type: "process",
+          icon: "&#9881;",
+          label: "Free-Text Notes Field",
+          detail: "Captures everything discussed on site that differs from the standard package",
+          subs: [
+            "Example: \"No bar stools - no space in kitchen. Queen bed in master instead of double.\"",
+            "Example: \"Add second outdoor setting for rear balcony. Client prefers light coastal palette.\"",
+            "Example: \"Remove entertainment unit - wall-mounted TV already installed.\"",
+            "Can be typed manually or dictated via iPad voice-to-text for speed",
+            "Keeps the form dead simple - one text box instead of 109 product dropdowns"
+          ]
+        }
+      ]
+    },
+    {
+      icon: "&#10209;",
+      number: "Phase 4",
+      name: "Client Acceptance",
+      nodes: [
+        {
+          type: "process",
+          icon: "&#9881;",
+          label: "Clean Summary Screen",
+          detail: "Client sees a professional, simple summary of what they are committing to",
+          subs: [
+            "Displays: package name, total price, and property address",
+            "Includes note: \"A detailed breakdown of your styling package will follow within 24 hours\"",
+            "Sets expectation that the full item-level invoice is coming - removes objection before it happens",
+            "No clutter, no CRM interface, no confusion - just the commitment moment"
+          ]
+        },
+        {
+          type: "trigger",
+          icon: "&#9654;",
+          label: "Client Taps Accept",
+          detail: "Formal digital commitment captured on the spot while intent is fresh",
+          subs: [
+            "Replaces the verbal handshake with a recorded, timestamped acceptance",
+            "Client commits while they are in the mindset to say yes",
+            "No gap for doubt, competitor quotes, or lost momentum",
+            "Triggers all downstream automation instantly"
+          ]
+        }
+      ]
+    },
+    {
+      icon: "&#8635;",
+      number: "Phase 5",
+      name: "Zoho CRM Sync",
+      nodes: [
+        {
+          type: "automation",
+          icon: "&#9889;",
+          label: "Deal Created or Updated in Zoho",
+          detail: "All captured data writes back to your existing Zoho CRM, no manual entry",
+          subs: [
+            "Deal record updated with selected package category and pricing",
+            "Client acceptance status and timestamp recorded on the deal",
+            "Consultation notes attached to the deal record for the ops team",
+            "All existing Zoho fields and custom data preserved - nothing overwritten"
+          ]
+        },
+        {
+          type: "automation",
+          icon: "&#9889;",
+          label: "Blueprint Stage Transition",
+          detail: "Deal automatically progresses through your existing Zoho blueprint",
+          subs: [
+            "Stage transitions from current state to \"Estimate Accepted\"",
+            "Respects all your existing blueprint automations, workflows, and triggers",
+            "Any downstream Zoho automations you already have in place fire as normal",
+            "No changes required to your current Zoho blueprint setup"
+          ]
+        },
+        {
+          type: "automation",
+          icon: "&#9889;",
+          label: "Ops Manager Notified",
+          detail: "Instant email notification so the back-office knows a quote has been accepted",
+          subs: [
+            "Notification sent the moment the client taps Accept",
+            "Includes client name, property address, package selected, and price",
+            "Ops manager can begin preparing the detailed invoice immediately"
+          ]
+        }
+      ]
+    },
+    {
+      icon: "&#10022;",
+      number: "Phase 6",
+      name: "AI-Powered Action Brief",
+      nodes: [
+        {
+          type: "ai",
+          icon: "&#10022;",
+          label: "Notes Cross-Referenced Against Default Package",
+          detail: "AI reads the consultation notes and compares them to the standard product list for that package",
+          subs: [
+            "Pulls the default product list for the selected package category from Zoho in real time",
+            "Parses the free-text notes to identify additions, removals, and swaps",
+            "Example: notes say \"no bar stools\" - AI identifies Bar Stools (x2) as a removal from the default list",
+            "Example: notes say \"queen bed in master\" - AI identifies swap from Double Bed to Queen Bed"
+          ]
+        },
+        {
+          type: "ai",
+          icon: "&#10022;",
+          label: "Structured Modification Checklist Generated",
+          detail: "Raw notes transformed into a clear, actionable checklist for the ops manager",
+          subs: [
+            "Format: Remove - Bar Stools (x2)",
+            "Format: Swap - Double Bed to Queen Bed (Master Bedroom)",
+            "Format: Add - Outdoor Setting (Rear Balcony)",
+            "Format: Note - Client prefers light coastal palette",
+            "Unchanged items listed separately so the ops manager can see the full picture",
+            "Eliminates guesswork - ops manager follows the checklist rather than interpreting scribbled notes"
+          ]
+        },
+        {
+          type: "automation",
+          icon: "&#9889;",
+          label: "Action Brief Emailed to Ops Manager",
+          detail: "Structured email delivered with everything needed to customise and invoice",
+          subs: [
+            "Email contains: client details, property address, package selected, accepted price",
+            "Modification checklist formatted as a clear, scannable list",
+            "Ops manager opens the deal in Zoho, follows the checklist, customises the package",
+            "No phone calls to stylists asking \"what did the client say about the bed?\""
+          ]
+        }
+      ]
+    },
+    {
+      icon: "&#8599;",
+      number: "Phase 7",
+      name: "Back-Office Fulfilment",
+      nodes: [
+        {
+          type: "process",
+          icon: "&#9881;",
+          label: "Ops Manager Customises Package in Zoho",
+          detail: "Following the AI-generated checklist, the ops manager edits the standard package",
+          subs: [
+            "Opens the deal in Zoho CRM as they normally would",
+            "Follows the structured checklist: remove bar stools, swap double for queen, add outdoor setting",
+            "Customises the package details to reflect exactly what was discussed on site",
+            "Process is faster and more accurate because the checklist does the thinking"
+          ]
+        },
+        {
+          type: "automation",
+          icon: "&#9889;",
+          label: "Detailed Invoice Sent to Client",
+          detail: "Client receives a professional, itemised invoice within 24 hours of acceptance",
+          subs: [
+            "Invoice generated through your existing Zoho Books process - no change to current workflow",
+            "Contains full package details: every furniture item, room allocation, pricing",
+            "Reflects the on-site consultation accurately - no pushback about missing items or wrong products",
+            "Payment options discussed and applied as per your current process (50% upfront, 100% upfront, etc.)"
+          ]
+        }
+      ]
+    }
+  ],
+  principles: [
+    {
+      name: "Single Source of Truth",
+      desc: "The form reads from and writes to your existing Zoho CRM and product database. No duplicate systems to maintain, no data drift between platforms."
+    },
+    {
+      name: "Simplicity On-Site, Detail In-Office",
+      desc: "Stylists and agents get a dead-simple interface with one dropdown, toggles, and a notes box. The complexity of 109 products stays where it belongs - with your ops team in Zoho."
+    },
+    {
+      name: "Zero Workflow Disruption",
+      desc: "Your existing Zoho blueprints, automations, invoicing, and deal stages remain exactly as they are. This system plugs into your process, it does not replace it."
+    }
+  ]
+};
+
+function render() {
+  var app = document.getElementById('app');
+  var html = '';
+
+  // Header
+  html += '<div class="header">';
+  html += '<div class="brand">Oxyscale AI</div>';
+  html += '<div class="header-client">' + data.client + '</div>';
+  html += '<h1 class="header-title">' + data.title + '</h1>';
+  html += '<p class="header-sub">' + data.subtitle + '</p>';
+  html += '</div>';
+
+  // Problem Section
+  html += '<div class="problem-section">';
+  html += '<div class="problem-label">The Problem We Are Solving</div>';
+  html += '<div class="problem-title">' + data.problem.title + '</div>';
+  html += '<p class="problem-text">' + data.problem.text + '</p>';
+  html += '</div>';
+
+  // Legend
+  html += '<div class="legend">';
+  data.legend.forEach(function(l) {
+    html += '<div class="legend-item">';
+    html += '<div class="legend-icon ' + l.cls + '">' + l.icon + '</div>';
+    html += '<span>' + l.label + '</span>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // Phases
+  data.phases.forEach(function(phase, pi) {
+    html += '<div class="phase">';
+    html += '<div class="phase-header">';
+    html += '<div class="phase-icon">' + phase.icon + '</div>';
+    html += '<div class="phase-meta">';
+    html += '<div class="phase-number">' + phase.number + '</div>';
+    html += '<div class="phase-name">' + phase.name + '</div>';
+    html += '</div>';
+    html += '</div>';
+    html += '<div class="phase-body">';
+
+    phase.nodes.forEach(function(node, ni) {
+      var isAI = node.type === 'ai';
+      var nodeClass = 'node' + (isAI ? ' ai-node' : '');
+      html += '<div class="' + nodeClass + '" onclick="toggleNode(this)">';
+      html += '<div class="node-header">';
+      html += '<div class="node-icon">' + node.icon + '</div>';
+      html += '<div style="flex:1">';
+      html += '<div class="node-label">' + node.label;
+      if (isAI) html += '<span class="ai-badge">&#10022; AI</span>';
+      html += '</div>';
+      html += '<div class="node-detail">' + node.detail + '</div>';
+      html += '</div>';
+      html += '<div class="node-arrow">&#9656;</div>';
+      html += '</div>';
+      html += '<div class="node-content">';
+      node.subs.forEach(function(s) {
+        html += '<div class="sub-item">';
+        html += '<div class="sub-dot"></div>';
+        html += '<span>' + s + '</span>';
+        html += '</div>';
+      });
+      html += '</div>';
+      html += '</div>';
+
+      if (ni < phase.nodes.length - 1) {
+        html += '<div style="display:flex;justify-content:center;height:16px;position:relative;">';
+        html += '<div style="width:1px;height:100%;background:var(--border);"></div>';
+        html += '</div>';
+      }
+    });
+
+    html += '</div>';
+
+    if (pi < data.phases.length - 1) {
+      html += '<div class="phase-connector"></div>';
+    }
+
+    html += '</div>';
+  });
+
+  // Design Principles
+  html += '<div class="principles-section">';
+  html += '<div class="principles-label">Design Principles</div>';
+  html += '<div class="principles-title">How This System Was Built</div>';
+  html += '<div class="principles-grid">';
+  data.principles.forEach(function(p) {
+    html += '<div class="principle-card">';
+    html += '<div class="principle-name">' + p.name + '</div>';
+    html += '<div class="principle-desc">' + p.desc + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+  html += '</div>';
+
+  // Footer
+  html += '<div class="footer">Oxyscale AI &middot; Work Smarter, Not Harder</div>';
+
+  app.innerHTML = html;
+}
+
+function toggleNode(el) {
+  el.classList.toggle('expanded');
+}
+
+render();
+</script>
+</body>
+</html>
